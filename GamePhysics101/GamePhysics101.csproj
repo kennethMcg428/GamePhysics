@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\PhysicsEngine.cs" />
+    <Compile Include="Assets\Scripts\DrawForces.cs" />
     <Compile Include="Assets\TEST.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
