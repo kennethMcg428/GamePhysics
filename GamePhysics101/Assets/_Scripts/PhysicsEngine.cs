@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PhysicsEngine : MonoBehaviour {
 
     //Forces
@@ -17,14 +18,19 @@ Air Resistance Force*
 Applied Force*
 Spring Force*
          */
-         //Force Vectors
+    //Trails
+    public bool showTrails = true;
+    private LineRenderer lineRenderer;
+    private int numberOfForces;
+
+    //Force Vectors
     private Vector3 FrictionalForce;
     private Vector3 GravitationalForce;
     private Vector3 AppliedForce;
     private Vector3 NormalForce;
     private Vector3 AirResistanceForce;
     private Vector3 SpringForce;
-    private Vector3 netForceVector;
+    public Vector3 netForceVector;
 
     public List<Vector3> forceVectorList = new List<Vector3>();
     public Vector3 VelocityVector; // average velocity this FixedUpdate()
@@ -34,28 +40,38 @@ Spring Force*
 
 	// Use this for initialization
 	void Start () {
-       FrictionalForce.x = 5;
-       //forceVectorList.Add(FrictionalForce);
-        
+        InitializeTrails();
 	}
-
-    private void FixedUpdate()
+    private void Update()
     {
-        AddForces();
-        Accelerate();
-    }
-    void Accelerate()
-    {
-        if(netForceVector == Vector3.zero)
+        if (showTrails)
         {
-            transform.position += VelocityVector * Time.deltaTime;
+            lineRenderer.enabled = true;
+            numberOfForces = forceVectorList.Count;
+            lineRenderer.SetVertexCount(numberOfForces * 2);
+            int i = 0;
+            foreach (Vector3 forceVector in forceVectorList)
+            {
+                lineRenderer.SetPosition(i, Vector3.zero);
+                lineRenderer.SetPosition(i + 1, -forceVector);
+                i = i + 2;
+            }
         }
         else
         {
-            UpdateVelocity();
-            transform.position += VelocityVector * Time.deltaTime;
+            lineRenderer.enabled = false;
         }
-        
+    }
+    private void FixedUpdate()
+    {
+        AddForces();
+        UpdateVelocity();
+        transform.position += VelocityVector * Time.deltaTime;
+    }
+    void Accelerate()
+    {
+           UpdateVelocity();
+          
     }
     void AddForces()
     {
@@ -66,6 +82,18 @@ Spring Force*
     void UpdateVelocity()
     {
         Vector3 accelerationVector = netForceVector / Mass;
-        VelocityVector = accelerationVector * Time.deltaTime;
+        VelocityVector += accelerationVector * Time.deltaTime;
+    }
+    void InitializeTrails()
+    {
+        lineRenderer = gameObject.AddComponent<LineRenderer>();
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+        lineRenderer.SetColors(Color.yellow, Color.yellow);
+        lineRenderer.SetWidth(0.2F, 0.2F);
+        lineRenderer.useWorldSpace = false;
+    }
+    public List<Vector3> GetForceVectorList()
+    {
+        return forceVectorList;
     }
 }
