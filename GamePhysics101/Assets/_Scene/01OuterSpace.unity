@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 982300562}
   - component: {fileID: 982300564}
   - component: {fileID: 982300563}
+  - component: {fileID: 982300565}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -399,11 +400,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: becff91769ffc2c43bca0ba7755684f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showTrails: 1
-  netForceVector: {x: 0, y: 0, z: 0}
   forceVectorList: []
+  Mass: 2000000
   VelocityVector: {x: 0, y: 0, z: 0}
-  Mass: 1
+  netForceVector: {x: 0, y: 0, z: 0}
+  showTrails: 1
 --- !u!114 &982300563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -428,3 +429,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceVector: {x: 5, y: 10, z: 0}
+--- !u!114 &982300565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 982300557}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 557b5287a3a095a479d807ed34a3a603, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fuelMass: 1000
+  maxThrust: 2278
+  thrustPercent: 0
+  ThrustUnitVector: {x: 0, y: 1, z: 0}
