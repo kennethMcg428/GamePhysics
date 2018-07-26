@@ -42,6 +42,10 @@ public class RocketEngine : MonoBehaviour {
         float exhaustMassFlow = 0 ;
         float effectiveExhaustVelocity = 0;
 
+        effectiveExhaustVelocity = 4464;            // [m s^=1]     liquid H O
+
+        //effectiveExhaustVelocity = 4535;            //  [m s^-1]  LH2
+
         exhaustMassFlow = currTrust / effectiveExhaustVelocity;
 
         return exhaustMassFlow * Time.deltaTime;
