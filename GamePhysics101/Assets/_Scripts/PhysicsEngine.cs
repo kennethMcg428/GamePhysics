@@ -53,7 +53,7 @@ Spring Force*
         {
             foreach(PhysicsEngine physicsEngineB in physicsEngineArray)
             {
-                if(physicsEngineA != physicsEngineB)
+                if(physicsEngineA != physicsEngineB && physicsEngineA != this)
                 {
                     Vector3 offset = physicsEngineA.transform.position - physicsEngineB.transform.position;
                     float rSquared = Mathf.Pow(offset.magnitude, 2);
@@ -76,6 +76,7 @@ Spring Force*
     public void AddForce(Vector3 forceVector)
     {
         forceVectorList.Add(forceVector);
+        Debug.Log("Adding force " + forceVector + " to " + gameObject.name);
     }
 
     void UpdatePosition()

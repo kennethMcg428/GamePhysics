@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\_Scripts\AddForce.cs" />
+    <Compile Include="Assets\_Scripts\FluidDrag.cs" />
     <Compile Include="Assets\_Scripts\PhysicsEngine.cs" />
     <Compile Include="Assets\_Scripts\RocketEngine.cs" />
     <Compile Include="Assets\Scripts\DrawForces.cs" />
