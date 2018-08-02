@@ -32,7 +32,6 @@ Spring Force*
     [HideInInspector]
     public List<Vector3> forceVectorList = new List<Vector3>();
 
-    private PhysicsEngine[] physicsEngineArray;
     public float Mass = 1;      // [kg]
     public Vector3 VelocityVector; // [m s^-1]
     public Vector3 netForceVector; // N [kg m s^-1]
@@ -40,43 +39,21 @@ Spring Force*
     private LineRenderer lineRenderer;
     public bool showTrails = true;
 
-    private const float BigG = 6.674e-11f; //N·kg–2·m2   [m^3 s^-2 kg^-1]
-
     // Use this for initialization
     void Start () {
         InitializeTrails();
-        physicsEngineArray = GameObject.FindObjectsOfType<PhysicsEngine>();
 	}
-    void CalculateGravity()
-    {
-        foreach(PhysicsEngine physicsEngineA in physicsEngineArray)
-        {
-            foreach(PhysicsEngine physicsEngineB in physicsEngineArray)
-            {
-                if(physicsEngineA != physicsEngineB && physicsEngineA != this)
-                {
-                    Vector3 offset = physicsEngineA.transform.position - physicsEngineB.transform.position;
-                    float rSquared = Mathf.Pow(offset.magnitude, 2);
-               
-                    float gravitationalForce = BigG*(physicsEngineA.Mass * physicsEngineB.Mass /rSquared);
-                    Vector3 gravitationalForceVector = gravitationalForce * offset.normalized;
-                    Debug.Log("Calculating gravitational force of " + physicsEngineA + " by " + physicsEngineB);
-                    physicsEngineA.AddForce(-gravitationalForceVector);
-                }
-            }
-        }
-    }
+   
     private void FixedUpdate()
     {
         RenderTrails();
-        CalculateGravity();
         UpdatePosition();
     }
 
     public void AddForce(Vector3 forceVector)
     {
         forceVectorList.Add(forceVector);
-        Debug.Log("Adding force " + forceVector + " to " + gameObject.name);
+        //Debug.Log("Adding force " + forceVector + " to " + gameObject.name);
     }
 
     void UpdatePosition()
